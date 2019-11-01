@@ -25,13 +25,92 @@
 //   });
 
 //response.data.articles  within here, we have 5 arrays filled with objects. Each array corresponds with a topic.
-//articles is itself an object
+//articles is itself an object. we've got bootstrap, javascript, jquery, node, technology as arrays with arrays inside
 
 //i think we'll be doing something like this? response.data.articles.bootstrap, as an example. Bootstrap is an array with 3 articles, each article object has a headline, authorPhoto and authorName
 
 //should have a total of 15 articles
 
 //i think we want to do Object.entries. so first we'd do const articleEntries = Object.entries(articles); and then we can do articleEntries.forEach
+
+const cardContainer = document.querySelector(".cards-container");
+
+axios
+  .get("https://lambda-times-backend.herokuapp.com/articles")
+  .then(response => {
+    //use object.entries to const a new array
+    // const topicsArray = Object.values(response.data.articles);
+    // console.log(topicsArray);
+    const bootstrapArray = response.data.articles.bootstrap;
+    // console.log(bootstrapArray);
+
+    const javascriptArray = response.data.articles.javascript;
+    // console.log(javascriptArray);
+
+    const jqueryArray = response.data.articles.jquery;
+    // console.log(jqueryArray);
+
+    const nodeArray = response.data.articles.node;
+    // console.log(nodeArray);
+
+    const technologyArray = response.data.articles.technology;
+    // console.log(technologyArray);
+
+    bootstrapArray.forEach(item => {
+      const newArticleCard = createCard(
+        item.headline,
+        item.authorPhoto,
+        item.authorName
+      );
+      cardContainer.appendChild(newArticleCard);
+    });
+
+    javascriptArray.forEach(item => {
+      const newArticleCard = createCard(
+        item.headline,
+        item.authorPhoto,
+        item.authorName
+      );
+      cardContainer.appendChild(newArticleCard);
+    });
+
+    jqueryArray.forEach(item => {
+      const newArticleCard = createCard(
+        item.headline,
+        item.authorPhoto,
+        item.authorName
+      );
+      cardContainer.appendChild(newArticleCard);
+    });
+
+    nodeArray.forEach(item => {
+      const newArticleCard = createCard(
+        item.headline,
+        item.authorPhoto,
+        item.authorName
+      );
+      cardContainer.appendChild(newArticleCard);
+    });
+
+    technologyArray.forEach(item => {
+      const newArticleCard = createCard(
+        item.headline,
+        item.authorPhoto,
+        item.authorName
+      );
+      cardContainer.appendChild(newArticleCard);
+    });
+  });
+
+// topicsArray.map(item => {
+//   const newArticleCard = createCard(
+//     item.headline,
+//     item.authorPhoto,
+//     item.authorName
+//   );
+//   cardContainer.appendChild(newArticleCard);
+// });
+//   });
 
 // createCard function
 
