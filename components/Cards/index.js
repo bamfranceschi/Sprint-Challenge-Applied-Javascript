@@ -33,74 +33,93 @@
 
 //i think we want to do Object.entries. so first we'd do const articleEntries = Object.entries(articles); and then we can do articleEntries.forEach
 
+//Below is deconstructing the Article Object using Object.entries and then applying the .forEach method on its values, which happen to be the arrays that were matched with topic keys.
+
 const cardContainer = document.querySelector(".cards-container");
 
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(response => {
-    //use object.entries to const a new array
-    // const topicsArray = Object.values(response.data.articles);
-    // console.log(topicsArray);
-    const bootstrapArray = response.data.articles.bootstrap;
-    // console.log(bootstrapArray);
-
-    const javascriptArray = response.data.articles.javascript;
-    // console.log(javascriptArray);
-
-    const jqueryArray = response.data.articles.jquery;
-    // console.log(jqueryArray);
-
-    const nodeArray = response.data.articles.node;
-    // console.log(nodeArray);
-
-    const technologyArray = response.data.articles.technology;
-    // console.log(technologyArray);
-
-    bootstrapArray.forEach(item => {
-      const newArticleCard = createCard(
-        item.headline,
-        item.authorPhoto,
-        item.authorName
-      );
-      cardContainer.appendChild(newArticleCard);
-    });
-
-    javascriptArray.forEach(item => {
-      const newArticleCard = createCard(
-        item.headline,
-        item.authorPhoto,
-        item.authorName
-      );
-      cardContainer.appendChild(newArticleCard);
-    });
-
-    jqueryArray.forEach(item => {
-      const newArticleCard = createCard(
-        item.headline,
-        item.authorPhoto,
-        item.authorName
-      );
-      cardContainer.appendChild(newArticleCard);
-    });
-
-    nodeArray.forEach(item => {
-      const newArticleCard = createCard(
-        item.headline,
-        item.authorPhoto,
-        item.authorName
-      );
-      cardContainer.appendChild(newArticleCard);
-    });
-
-    technologyArray.forEach(item => {
-      const newArticleCard = createCard(
-        item.headline,
-        item.authorPhoto,
-        item.authorName
-      );
-      cardContainer.appendChild(newArticleCard);
-    });
+    for (let [key, value] of Object.entries(response.data.articles)) {
+      value.forEach(item => {
+        const newArticleCard = createCard(
+          item.headline,
+          item.authorPhoto,
+          item.authorName
+        );
+        cardContainer.appendChild(newArticleCard);
+      });
+    }
   });
+
+//Below is one example that works, but I specifically pulled out each topic section within the Article Object and then applied the .forEach method to each topic array.
+
+// axios
+//   .get("https://lambda-times-backend.herokuapp.com/articles")
+//   .then(response => {
+//     //use object.entries to const a new array
+//     // const topicsArray = Object.values(response.data.articles);
+//     // console.log(topicsArray);
+//     const bootstrapArray = response.data.articles.bootstrap;
+//     // console.log(bootstrapArray);
+
+//     const javascriptArray = response.data.articles.javascript;
+//     // console.log(javascriptArray);
+
+//     const jqueryArray = response.data.articles.jquery;
+//     // console.log(jqueryArray);
+
+//     const nodeArray = response.data.articles.node;
+//     // console.log(nodeArray);
+
+//     const technologyArray = response.data.articles.technology;
+//     // console.log(technologyArray);
+
+//     bootstrapArray.forEach(item => {
+//       const newArticleCard = createCard(
+//         item.headline,
+//         item.authorPhoto,
+//         item.authorName
+//       );
+//       cardContainer.appendChild(newArticleCard);
+//     });
+
+//     javascriptArray.forEach(item => {
+//       const newArticleCard = createCard(
+//         item.headline,
+//         item.authorPhoto,
+//         item.authorName
+//       );
+//       cardContainer.appendChild(newArticleCard);
+//     });
+
+//     jqueryArray.forEach(item => {
+//       const newArticleCard = createCard(
+//         item.headline,
+//         item.authorPhoto,
+//         item.authorName
+//       );
+//       cardContainer.appendChild(newArticleCard);
+//     });
+
+//     nodeArray.forEach(item => {
+//       const newArticleCard = createCard(
+//         item.headline,
+//         item.authorPhoto,
+//         item.authorName
+//       );
+//       cardContainer.appendChild(newArticleCard);
+//     });
+
+//     technologyArray.forEach(item => {
+//       const newArticleCard = createCard(
+//         item.headline,
+//         item.authorPhoto,
+//         item.authorName
+//       );
+//       cardContainer.appendChild(newArticleCard);
+//     });
+//   });
 
 // topicsArray.map(item => {
 //   const newArticleCard = createCard(
